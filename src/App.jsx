@@ -8,6 +8,8 @@ function App() {
   const timerRef = useRef(null);
   const [count, setCount] = useState(0);
   const [flag, setFlag] = useState(true);
+  const [w, setW] = useState();
+  const [h, setH] = useState();
 
   function startGame() {
     setFlag(false)
@@ -36,24 +38,52 @@ function App() {
     }
   }
 
+  const changeDifficulty = (dif) => {
+    switch (dif) {
+      case "easy":
+        setH('48px')
+        setW('48px')
+        break;
+      case "medium":
+        setH('38px')
+        setW('38px')
+        break;
+      case "hard":
+        setH('28px')
+        setW('28px')
+        break;
+    }
+  }
+
   return (
     <main>
       <header>
         <h1>{seconds} segundos</h1>
       </header>
-      <section style={{ height: '90%'}} >
+      <section style={{ height: '90%' }} >
         {
-          count < 10 ? 
-            !flag ? <figure style={{ position: "absolute", top: y, left: x }} onClick={() => positionRandom()} /> : 
-                    <figure style={{ position: "absolute", top: y, left: x }}  />
+          count < 10 ?
+            !flag ? <figure style={{ position: "absolute", top: y, left: x, width: w, height: h }} onClick={() => positionRandom()} /> :
+              <figure style={{ position: "absolute", top: y, left: x, width: w, height: h }} />
             :
-            <div style={{display:'flex',alignItems:'center', justifyContent:'center',marginTop:'200px'}}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '200px' }}>
               <h2>Game Over</h2>
             </div>
+        }
+        {
+          flag ?
+            <div>
+              <button className='btnDif' onClick={() => changeDifficulty('easy')} >Easy</button>
+              <button className='btnDif' onClick={() => changeDifficulty('medium')}>Medium</button>
+              <button className='btnDif' onClick={() => changeDifficulty('hard')}>Hard</button>
+            </div>
+            :
+            <></>
         }
 
       </section>
       <footer>
+        
         {
           flag ?
             <button onClick={() => startGame()}>Jugar</button>
