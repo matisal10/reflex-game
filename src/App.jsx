@@ -1,6 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState, useRef } from 'react'
 // import './App.css'
 
 function App() {
@@ -10,7 +8,6 @@ function App() {
   const timerRef = useRef(null);
   const [count, setCount] = useState(0);
   const [flag, setFlag] = useState(true);
-  const timer = null;
 
   function startGame() {
     setFlag(false)
