@@ -22,16 +22,20 @@ function App() {
   }
 
   function reset() {
-    setX(Math.random() * window.innerWidth);
-    setY(Math.random() * window.innerHeight);
+    setX(Math.floor(Math.random() * window.innerWidth ));
+    setY(Math.floor(Math.random() * (800)));
     setCount(0)
     setSeconds(0)
     setFlag(true)
   }
 
   const positionRandom = () => {
-    setX(Math.random() * window.innerWidth);
-    setY(Math.random() * window.innerHeight);
+    setX(Math.floor(Math.random() * window.innerWidth ));
+    setY(Math.floor(Math.random() * (800)));
+    console.log(window.innerWidth)
+    if(x > window.innerWidth){
+      setW(x * -1)
+    }
     setCount(count + 1)
     if (count == 9) {
       clearInterval(timerRef.current)
@@ -60,11 +64,11 @@ function App() {
       <header>
         <h1>{seconds} segundos</h1>
       </header>
-      <section style={{ height: '90%' }} >
+      <section style={{ position: 'relative', height: '800px' }} >
         {
           count < 10 ?
             !flag ? <figure style={{ position: "absolute", top: y, left: x, width: w, height: h }} onClick={() => positionRandom()} /> :
-              <figure style={{ position: "absolute", top: y, left: x, width: w, height: h }} />
+              <figure style={{ position: "absolute", top: y, left: x, width: w, height: h, cursor: 'default' }} />
             :
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '200px' }}>
               <h2>Game Over</h2>
@@ -83,12 +87,12 @@ function App() {
 
       </section>
       <footer>
-        
+
         {
           flag ?
             <button onClick={() => startGame()}>Jugar</button>
             :
-            <button onClick={reset}>Reiniciar</button>
+            count == 10 ? <button onClick={reset}>Reiniciar</button> :  <></>
         }
       </footer>
     </main>
