@@ -32,7 +32,6 @@ function App() {
   const positionRandom = () => {
     setX(Math.floor(Math.random() * window.innerWidth ));
     setY(Math.floor(Math.random() * (800)));
-    console.log(window.innerWidth)
     if(x > window.innerWidth){
       setW(x * -1)
     }
